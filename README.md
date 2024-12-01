@@ -10,7 +10,6 @@
 
 ## Structure of the Project
 - Machine_Learning_Project.egg-info/
-
 - src/
   - components/
     - __init__.py
