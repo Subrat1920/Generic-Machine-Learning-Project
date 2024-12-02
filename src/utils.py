@@ -60,39 +60,13 @@ def evaluate_models(x_train,y_train,x_test, y_test,models, param):
 
             return report
 
-# def evaluate_models(x_train, y_train, x_test, y_test, models, param):
-#     try:
-#         report = {}
+    except Exception as e:
+        raise CustomException(e, sys)
 
-#         for model_name, model in models.items():
-#             para = param.get(model_name, None)
-            
-#             # Ensure parameters are provided for the model
-#             if para is None:
-#                 raise ValueError(f"Parameter grid for {model_name} is not provided.")
-
-#             # Perform Grid Search CV
-#             gs = GridSearchCV(estimator=model, param_grid=para, cv=5, scoring='r2')
-#             gs.fit(x_train, y_train)
-
-#             # Use the best model found in Grid Search
-#             best_model = gs.best_estimator_
-
-#             # Fit the best model to the training data
-#             best_model.fit(x_train, y_train)
-
-#             # Make predictions
-#             y_train_pred = best_model.predict(x_train)
-#             y_test_pred = best_model.predict(x_test)
-
-#             # Calculate R2 scores
-#             train_model_score = r2_score(y_train, y_train_pred)
-#             test_model_score = r2_score(y_test, y_test_pred)
-
-#             # Store the test score in the report
-#             report[model_name] = test_model_score
-
-#         return report
-
+def load_object(file_path):
+    try:
+        with open(file_path, 'rb') as file_obj:
+            return dill.load(file_obj)
+    
     except Exception as e:
         raise CustomException(e, sys)
